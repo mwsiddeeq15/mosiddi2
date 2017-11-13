@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { IndexRoute, Router, Route } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './store/reducers';
-import { Home, Login, Blog } from './views';
+import { Home, Login, Blog, Playground } from './views';
 
 const AppContainer = (props) => (
   <div>{ props.children }</div>
@@ -19,7 +19,7 @@ const routes = (
       <Route path="/" component={ AppContainer }>
         <IndexRoute component={ Home } />
         <Route path="blog" component={ Blog }/>
-        <Route path="login" component={ Test }/>
+        <Route path="playground" component={ Playground }/>
       </Route>
     </Router>
   </Provider>

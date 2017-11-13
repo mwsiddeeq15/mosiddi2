@@ -1,7 +1,7 @@
-import { Grid } from './Grid.js';
-import { Col } from './GridColumn.js';
-import { Row } from './GridRow.js';
-import { Cell } from './GridCell.js';
+import { Grid } from './Grid';
+import { Col } from './GridColumn';
+import { Row } from './GridRow';
+import { Cell } from './GridCell';
 
 export {
   Grid,

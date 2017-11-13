@@ -1,0 +1,126 @@
+@import "../../common/style/variables.less";
+
+@fade_color: rgba(149, 165, 166, .85);
+@background_color: rgb(189, 195, 199);
+@border_line_style: 5px solid rgb(149, 165, 166);
+// TODO :: add some default styling and effects
+.Terminal {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  background: @background_color;
+
+
+  *{
+    font-family: monospace;
+  }
+
+  & .whiteSpace{
+    color: rgba(0,0,0,0);
+    //display: none;
+  }
+
+  & textarea.Terminal-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background: none;
+    resize: none;
+    border: none;
+    outline: none;
+    color: rgba(0,0,0,0);
+  }
+
+  & .Terminal-splitInput {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    word-wrap: break-word;
+    //outline: 1px solid red;
+  }
+
+  & .Terminal-shell {
+    position: unset;
+  }
+
+  & .Terminal-splitInput-section{
+    position: absolute;
+
+    //&:nth-child(5n+0) {
+    //  transition-delay: 5ms;
+    //}
+    //&:nth-child(4n+0) {
+    //  //transition: 1s;
+    //  transition-delay: 0ms;
+    //}
+    //&:nth-child(3n+0) {
+    //  transition-delay: 3ms;
+    //}
+    //&:nth-child(odd) {
+    //  transition: background 30s;
+    //  transition-delay: 100ms;
+    //}
+  }
+
+  & .Terminal-inputDisplay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    word-wrap: break-word;
+    //outline: 1px solid red;
+  }
+
+  & .Terminal-historyInput {
+    position: unset;
+    top: 0;
+    left: 0;
+    width: 100%;
+    word-wrap: break-word;
+    max-height: ~"calc(100% - 30px)";
+    //outline: 1px solid blue;
+
+    & .Terminal-splitInput-section{
+      //&:nth-child(odd) {
+      //  transition: 1s;
+      //  transition-delay: 1ms;
+      //}
+      //&:nth-child(odd) {
+      //  transition: 1s;
+      //  transition-delay: 1ms;
+      //}
+    }
+  }
+}
+
+//@keyframes enteredA {
+//  from {
+//    position: absolute;
+//    bottom: 0;
+//    color: red;
+//  }
+//  to {
+//    position: absolute;
+//    bottom: 100%;
+//    color: blue;
+//  }
+//}
+//
+//@keyframes enteredB {
+//  from {
+//    position: absolute;
+//    bottom: 0;
+//    color: green;
+//  }
+//  to {
+//    position: absolute;
+//    bottom: 100%;
+//    color: purple;
+//  }
+//}

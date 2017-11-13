@@ -18,7 +18,10 @@ console.log("LOG: ", __dirname)
 module.exports = {
     resolve: {
         modules: [__dirname, 'node_modules'],
-        extensions: ['.webpack.js', '.web.js', '.js', '.jsx']
+        extensions: ['.webpack.js', '.web.js', '.js', '.jsx'],
+        alias: {
+            Components: path.resolve(__dirname, 'src/components/')
+        }
     },
     devtool: 'source-map',
     entry: [
