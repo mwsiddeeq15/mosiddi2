@@ -15,7 +15,8 @@
     font-family: monospace;
   }
 
-  & .whiteSpace{
+  & .whiteSpace {
+    display: none; //TODO in-progress
     color: rgba(0,0,0,0);
     //display: none;
   }
@@ -37,7 +38,7 @@
   }
 
   & .Terminal-splitInput {
-    position: absolute;
+    position: relative; //TODO in-progress
     bottom: 0;
     left: 0;
     width: 100%;
@@ -50,7 +51,8 @@
   }
 
   & .Terminal-splitInput-section{
-    position: absolute;
+    position: relative; //TODO in-progress
+    bottom: 0; //TODO in-progress
 
     //&:nth-child(5n+0) {
     //  transition-delay: 5ms;
@@ -69,18 +71,18 @@
   }
 
   & .Terminal-inputDisplay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    top: 100px;
+    //left: 0;
     width: 100%;
     word-wrap: break-word;
     //outline: 1px solid red;
   }
 
   & .Terminal-historyInput {
-    position: unset;
-    top: 0;
-    left: 0;
+    //position: unset;
+    //top: 0;
+    //left: 0;
     width: 100%;
     word-wrap: break-word;
     max-height: ~"calc(100% - 30px)";

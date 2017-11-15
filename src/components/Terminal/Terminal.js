@@ -29,12 +29,29 @@ const TerminalInputDisplay = ({ input, className, offset }) => (
   </div>
 );
 
+// const TerminalHistory = ({ history, className, offset }) => {
+//   return (
+//     <div className={ ClassNames('Terminal-historyInput', className) }>
+//       {
+//         history.map((input, index) => (
+//           <div className={ ClassNames(index === history.length-1 && 'last') } key={ index }>
+//             <Shell />
+//             {
+//               splitInput(input, offset)
+//             }
+//           </div>
+//         ))
+//       }
+//     </div>
+//   );
+// };
+
 const TerminalHistory = ({ history, className, offset }) => {
   return (
     <div className={ ClassNames('Terminal-historyInput', className) }>
       {
         history.map((input, index) => (
-          <div className={ ClassNames(index === history.length-1 && 'last') } key={ index }>
+          <div key={ index }>
             <Shell />
             {
               splitInput(input, offset)
@@ -70,8 +87,8 @@ export class Terminal extends React.Component {
 
     return (
       <div className='Terminal'
-        onClick={ () => {
-          console.log("Click");
+        onClick={ (e) => {
+          console.log("Click ", e.target.selectionStart);
           document.querySelector('.Terminal-input')
         } }
         { ...props }>
