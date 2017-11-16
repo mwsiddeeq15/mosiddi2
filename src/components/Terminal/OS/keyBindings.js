@@ -12,7 +12,7 @@ export function down(e) {
       SystemFunctions.OnAutoComplete.call(this, e);
       break;
     default:
-      console.log("Key: ", e.keyCode)
+      console.log("Key: ", e.key, e.keyCode)
   }
 };
 

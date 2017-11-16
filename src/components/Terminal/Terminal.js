@@ -4,60 +4,58 @@ import keyBindings from './OS/keyBindings';
 import './Terminal.less';
 
 
-function splitInput(input, offset=0) {
+function splitInput(input) {
   return input.split('').map((s, i) => (
     <span className="Terminal-splitInput-section" key={ i }>
-      <span className="whiteSpace">{ [ Array(offset + 1).join('_'), ...input.slice(0, i+1) ] }</span>
-      { s }
+      { s === ' ' ? <span className="white-space">_</span> : s }
     </span>
   ));
 }
 
+function autoGrow(element) {
+  element.style.height = (element.scrollHeight)+"px";
+}
+
 const Shell = ({ decorate }) => (
   <span className="Terminal-shell">
-    <span className="whiteSpace">_</span>
-    <b>{ splitInput('$Mosi') }</b>
+    <span className="white-space">_</span>
+    <b>{ splitInput('$Mosi') }</b>&nbsp;
   </span>
 );
 
-const TerminalInputDisplay = ({ input, className, offset }) => (
-  <div className={ ClassNames('Terminal-inputDisplay', className) }>
-    <Shell />
-    {
-      splitInput(input, offset)
-    }
-  </div>
-);
-
-// const TerminalHistory = ({ history, className, offset }) => {
-//   return (
-//     <div className={ ClassNames('Terminal-historyInput', className) }>
-//       {
-//         history.map((input, index) => (
-//           <div className={ ClassNames(index === history.length-1 && 'last') } key={ index }>
-//             <Shell />
-//             {
-//               splitInput(input, offset)
-//             }
-//           </div>
-//         ))
-//       }
-//     </div>
-//   );
-// };
-
-const TerminalHistory = ({ history, className, offset }) => {
+const TerminalInput = ({ input, history, className, onChange, ...props }) => {
   return (
-    <div className={ ClassNames('Terminal-historyInput', className) }>
+    <div className={ ClassNames('Terminal-input', className) }>
       {
-        history.map((input, index) => (
-          <div key={ index }>
+        [
+          ...history.map((hist, index) => (
+            <div key={ index } className="input input-history">
+              <Shell />
+              <span className="textarea-wrapper">
+                {
+                  splitInput(hist)
+                }
+              </span>
+            </div>
+          )),
+          <div key={ history.length } className="input input-current">
             <Shell />
-            {
-              splitInput(input, offset)
-            }
+            <span className="textarea-wrapper">
+              {
+                splitInput(input)
+              }
+              <textarea
+                className="Terminal-textarea"
+                spellCheck="false"
+                onChange={ (e) => {
+                  onChange(e);
+                  autoGrow(e.target);
+                }}
+                { ...props }
+              />
+            </span>
           </div>
-        ))
+        ]
       }
     </div>
   );
@@ -70,38 +68,22 @@ export class Terminal extends React.Component {
     this.state = {
       input: '',
       history: [],
-      cursor: 0
     };
   }
 
-  componentDidMount() {
-  }
-
   onChange(e) {
-    console.log("Input: ", e.target.value);
     this.setState({ input: e.target.value });
   }
 
   render() {
-    const { ...props } = this.props;
-
     return (
-      <div className='Terminal'
-        onClick={ (e) => {
-          console.log("Click ", e.target.selectionStart);
-          document.querySelector('.Terminal-input')
-        } }
-        { ...props }>
-        <TerminalHistory history={ this.state.history } offset={ 6 } />
-        <TerminalInputDisplay input={ this.state.input } offset={ 6 } />
-        <textarea
-          className="Terminal-input"
-          rows="1"
-          spellCheck="false"
+      <div className='Terminal'>
+        <TerminalInput
+          history={ this.state.history }
+          input={ this.state.input }
           onKeyDown={ keyBindings.down.bind(this) }
           onChange={ this.onChange.bind(this) }
-        >
-        </textarea>
+        />
       </div>
     );
   }

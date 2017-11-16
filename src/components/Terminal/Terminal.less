@@ -3,126 +3,100 @@
 @fade_color: rgba(149, 165, 166, .85);
 @background_color: rgb(189, 195, 199);
 @border_line_style: 5px solid rgb(149, 165, 166);
-// TODO :: add some default styling and effects
+
 .Terminal {
   position: relative;
   width: 600px;
   height: 400px;
   background: @background_color;
+  overflow-x: hidden;
+  overflow-y: auto;
 
-
-  *{
+  * {
     font-family: monospace;
+    font-size: 12px;
   }
 
-  & .whiteSpace {
-    display: none; //TODO in-progress
-    color: rgba(0,0,0,0);
-    //display: none;
-  }
-
-  & textarea.Terminal-input {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    background: none;
-    resize: none;
-    border: none;
-    outline: none;
+  & .white-space {
     color: rgba(0,0,0,0);
   }
 
   & .Terminal-splitInput {
-    position: relative; //TODO in-progress
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    word-wrap: break-word;
-    //outline: 1px solid red;
+    word-wrap: break-word; //??
   }
 
   & .Terminal-shell {
-    position: unset;
+    //
   }
 
   & .Terminal-splitInput-section{
-    position: relative; //TODO in-progress
-    bottom: 0; //TODO in-progress
-
-    //&:nth-child(5n+0) {
-    //  transition-delay: 5ms;
-    //}
-    //&:nth-child(4n+0) {
-    //  //transition: 1s;
-    //  transition-delay: 0ms;
-    //}
-    //&:nth-child(3n+0) {
-    //  transition-delay: 3ms;
-    //}
-    //&:nth-child(odd) {
-    //  transition: background 30s;
-    //  transition-delay: 100ms;
-    //}
+    //
   }
 
-  & .Terminal-inputDisplay {
-    position: relative;
-    top: 100px;
-    //left: 0;
-    width: 100%;
-    word-wrap: break-word;
-    //outline: 1px solid red;
-  }
-
-  & .Terminal-historyInput {
-    //position: unset;
-    //top: 0;
-    //left: 0;
+  & .Terminal-input {
     width: 100%;
     word-wrap: break-word;
     max-height: ~"calc(100% - 30px)";
-    //outline: 1px solid blue;
 
-    & .Terminal-splitInput-section{
-      //&:nth-child(odd) {
-      //  transition: 1s;
-      //  transition-delay: 1ms;
-      //}
-      //&:nth-child(odd) {
-      //  transition: 1s;
-      //  transition-delay: 1ms;
-      //}
+    & .input {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+
+      & .textarea-wrapper {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        position: relative;
+      }
+
+      &.input-current {
+        & .textarea-wrapper {
+
+          & .Terminal-textarea {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: ~"calc(100% + 3px)";
+            height: auto;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: none;
+            resize: none;
+            border: none;
+            outline: none;
+            color: rgba(255,0,0,0);
+            caret-color: black;
+            //pointer-events: none;
+            word-wrap: break-word;
+            word-break: break-all;
+          }
+        }
+      }
+
+      & .Terminal-splitInput-section {
+        position: relative;
+        top: 0;
+        transition-property: top;
+        transition-timing-function: ease-out;
+
+        &:nth-child(1n) { transition-duration: 800ms; }
+        &:nth-child(2n) { transition-duration: 900ms; }
+        &:nth-child(3n) { transition-duration: 950ms; }
+        &:nth-child(4n) { transition-duration: 920ms; }
+        &:nth-child(5n) { transition-duration: 820ms; }
+        &:nth-child(6n) { transition-duration: 780ms; }
+        &:nth-child(7n) { transition-duration: 890ms; }
+        &:nth-child(8n) { transition-duration: 970ms; }
+        &:nth-child(9n) { transition-duration: 1000ms; }
+      }
+
+      &:last-child {
+        & .Terminal-splitInput-section {
+          top: 100px;
+        }
+      }
     }
   }
 }
-
-//@keyframes enteredA {
-//  from {
-//    position: absolute;
-//    bottom: 0;
-//    color: red;
-//  }
-//  to {
-//    position: absolute;
-//    bottom: 100%;
-//    color: blue;
-//  }
-//}
-//
-//@keyframes enteredB {
-//  from {
-//    position: absolute;
-//    bottom: 0;
-//    color: green;
-//  }
-//  to {
-//    position: absolute;
-//    bottom: 100%;
-//    color: purple;
-//  }
-//}
