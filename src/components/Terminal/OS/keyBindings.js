@@ -1,11 +1,11 @@
-import * as SystemFunctions from './systemFunctions';
+import * as SystemFunctions from './systemEvents';
 
 export function down(e) {
   switch(e.keyCode) {
     case 13: // Enter
       SystemFunctions.OnEnter.call(this, e);
       break;
-    case 220: //
+    case 220: // '\' key
       SystemFunctions.OnClear.call(this, e);
       break;
     case 9: // Tab

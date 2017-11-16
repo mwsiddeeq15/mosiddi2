@@ -1,9 +1,10 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import { shellDecorator } from './OS/systemConfigs';
 import keyBindings from './OS/keyBindings';
 import './Terminal.less';
 
-
+// splits input value into html elements to animate
 function splitInput(input) {
   return input.split('').map((s, i) => (
     <span className="Terminal-splitInput-section" key={ i }>
@@ -12,25 +13,26 @@ function splitInput(input) {
   ));
 }
 
+// textarea grows and expands with input text
 function autoGrow(element) {
   element.style.height = (element.scrollHeight)+"px";
 }
 
-const Shell = ({ decorate }) => (
+const Shell = ({ decorator, path }) => (
   <span className="Terminal-shell">
     <span className="white-space">_</span>
-    <b>{ splitInput('$Mosi') }</b>&nbsp;
+    <b>{ splitInput(`${ decorator } ${ path }`) }</b>&nbsp;
   </span>
 );
 
-const TerminalInput = ({ input, history, className, onChange, ...props }) => {
+const TerminalInput = ({ input, history, decorator, path, className, onChange, ...props }) => {
   return (
     <div className={ ClassNames('Terminal-input', className) }>
       {
         [
           ...history.map((hist, index) => (
             <div key={ index } className="input input-history">
-              <Shell />
+              <Shell decorator={ decorator } path={ path } />
               <span className="textarea-wrapper">
                 {
                   splitInput(hist)
@@ -39,7 +41,7 @@ const TerminalInput = ({ input, history, className, onChange, ...props }) => {
             </div>
           )),
           <div key={ history.length } className="input input-current">
-            <Shell />
+            <Shell decorator={ decorator } path={ path } />
             <span className="textarea-wrapper">
               {
                 splitInput(input)
@@ -68,6 +70,7 @@ export class Terminal extends React.Component {
     this.state = {
       input: '',
       history: [],
+      workPath: '/'
     };
   }
 
@@ -76,11 +79,15 @@ export class Terminal extends React.Component {
   }
 
   render() {
+    const { input, history, workPath } = this.state;
+
     return (
       <div className='Terminal'>
         <TerminalInput
-          history={ this.state.history }
-          input={ this.state.input }
+          decorator={ shellDecorator }
+          path={ workPath }
+          history={ history }
+          input={ input }
           onKeyDown={ keyBindings.down.bind(this) }
           onChange={ this.onChange.bind(this) }
         />

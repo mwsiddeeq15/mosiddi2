@@ -4,6 +4,8 @@ import jQuery from 'jquery';
 import { getRandomInt } from './utils';
 
 
+export const Read = (inputString) => {};
+
 export function OnEnter(e) {
   const { history, input } = this.state;
 
