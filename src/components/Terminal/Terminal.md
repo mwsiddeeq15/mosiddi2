@@ -1,2 +1,2 @@
-Sample Terminal:
+Terminal DOCS
 

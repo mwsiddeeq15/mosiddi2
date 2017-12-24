@@ -1,18 +1,9 @@
-import jQuery from 'jquery';
-
 export const SystemCommands = {
   cd: function (args) {
-    this.setState({ workPath: args[0] });
+    this.setState({ path: args[0] || '/' }); //TODO:: no state reference in here
   },
 
-  // echo: function (args) {
-  //   const { history, input } = this.state;
-  //
-  //   this.setState({
-  //     history: [ ...history, input ],
-  //     input: e.target.value
-  //   }, () => {
-  //     jQuery('.input-current .Terminal-textarea').focus();
-  //   });
-  // }
+  echo: function (args) {
+    this.write(args.join(' '));
+  }
 };
